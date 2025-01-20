@@ -75,7 +75,7 @@ export default function Sidebar({ session }: SideBarProps) {
           </li>
         ))}
       </ul>
-      <div className="w-full absolute bottom-5 left-0 p-y-2 cursor-pointer text-center">
+      <div>
         <LogoutButton />
       </div>
     </nav>
