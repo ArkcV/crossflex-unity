@@ -3,20 +3,44 @@
 import Image from 'next/image';
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Login() {
   const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
+
+  useEffect(() => {
+    const savedEmail = localStorage.getItem("savedEmail");
+    const savedPassword = localStorage.getItem("savedPassword");
+    const savedRememberMe = localStorage.getItem("rememberMe") === "true";
+    
+    if (savedRememberMe && savedEmail && savedPassword) {
+      setEmail(savedEmail);
+      setPassword(savedPassword);
+      setRememberMe(true);
+    }
+  }, []);
 
   async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
   
     const formData = new FormData(e.currentTarget);
     const data = {
-      email: formData.get("email") as string,
-      password: formData.get("password") as string,
+      email: formData.get("email") as string ?? "",
+      password: formData.get("password") as string ?? "",
     };
-  
-    console.log("Dados do formulário:", data);
+    
+    if (rememberMe) {
+      localStorage.setItem("savedEmail", data.email);
+      localStorage.setItem("savedPassword", data.password);
+      localStorage.setItem("rememberMe", "true");
+    } else {
+      localStorage.removeItem("savedEmail");
+      localStorage.removeItem("savedPassword");
+      localStorage.removeItem("rememberMe");
+    }
 
     const result = await signIn("credentials", {
       ...data,
@@ -43,6 +67,8 @@ export default function Login() {
             <input
               type="email"
               name='email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full p-2 border-2 border-blue-cf_blue rounded-md placeholder:font-light placeholder:text-gray-500 focus:border-blue-cf_blue focus:outline-none"
               placeholder="Digite seu Email"
               autoComplete='email'
@@ -53,13 +79,21 @@ export default function Login() {
             <input
               type="password"
               name='password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full p-2 border-2 border-blue-cf_blue rounded-md placeholder:font-light placeholder:text-gray-500 focus:border-blue-cf_blue focus:outline-none"
               placeholder="Digite sua Senha"
             />
           </div>
           <div className="flex justify-between w-full py-4">
             <label className="flex items-center">
-              <input type="checkbox" name='ch' className="mr-2" />
+              <input 
+                type="checkbox" 
+                name='rememberMe' 
+                checked={rememberMe} 
+                onChange={() => setRememberMe(!rememberMe)}
+                className="mr-2" 
+              />
               <span className="text-md">Lembrar-me</span>
             </label>
             <span className="text-base cursor-pointer text-blue-cf_blue">Recuperar Senha?</span>
