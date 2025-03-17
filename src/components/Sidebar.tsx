@@ -1,6 +1,5 @@
 "use client"
 
-
 import Link from "next/link";
 import { Session } from "next-auth";
 import { useState } from "react";
@@ -8,6 +7,7 @@ import { RxDashboard } from "react-icons/rx";
 import { BsBook, BsBox2, BsFileEarmarkCheck, BsHouse, BsPencilSquare, BsPeople, BsWallet2 } from "react-icons/bs";
 import { CgGym } from "react-icons/cg";
 import Image from "next/image";
+import LogoutButton from "./LogoutButton";
 
 interface SideBarProps {
   session: Session | null;
@@ -48,23 +48,26 @@ export default function Sidebar({ session }: SideBarProps) {
         <>
           {session ? (
             <div className="md:flex flex-col items-center text-white-cf_white hidden">
-              <span className="text-base font-bold">{session.user?.name}</span>
-              <span className="text-xs">{session.user?.email}</span>
+              <span className="text-base font-bold truncate w-32 text-center">{session.user?.name}</span>
+              <span className="text-xs truncate w-42 text-center">{session.user?.email}</span>
             </div>
           ) : (
-            <p className="text-white-cf_white hidden md:block">Faça o login...</p>
+            <div className="md:flex flex-col items-center text-white-cf_white hidden">
+              <span className="text-base font-bold truncate w-32 text-center">GaragemCross</span>
+              <span className="text-xs truncate w-42 text-center">GaragemCross@teste.com</span>
+            </div>
           )}
         </>
       </div>
       <ul>
         {menuItems.map((cat, index) => (
           <li key={index}>
-            <ul className="mt-10 space-y-2">
+            <ul className="mt-6 space-y-2">
               {cat.list.map((item) => (
                 <li
                   key={item.path}
                   onClick={() => setActiveLink(item.path)}
-                  className={`rounded-md py-2 text-blue-cf_blue hover:bg-white-cf_white hover:text-blue-cf_blue hover:font-bold ${activeLink === item.path ? ' bg-white-cf_white font-bold ' : 'text-white-cf_white'}`}>
+                  className={`rounded-md py-2 text-blue-cf_blue hover:bg-white-cf_white hover:text-blue-cf_blue hover:font-bold ${activeLink === item.path ? ' bg-white-cf_white font-bold ' : ' text-white-cf_white'} `}>
                   <Link href={item.path} className="flex items-center justify-center md:justify-start md:space-x-3">
                     <span className="md:ml-4 text-lg">{item.icon}</span>
                     <span className="hidden md:flex text-sm">{item.title}</span>
@@ -75,9 +78,9 @@ export default function Sidebar({ session }: SideBarProps) {
           </li>
         ))}
       </ul>
-      <div>
-        sair
-      </div>
+      <>
+        <LogoutButton />
+      </>
     </nav>
   );
 }

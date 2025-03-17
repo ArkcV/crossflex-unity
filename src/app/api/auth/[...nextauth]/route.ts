@@ -17,11 +17,11 @@ const handler = NextAuth({
           return null;
         }
 
-        if (credentials.email === "Garagemcross@gmail.com" && credentials.password === "123456Am") {
+        if (credentials.email === "Garagemcross@teste.com" && credentials.password === "123456Am") {
           return {
             id: "1",
             name: "GaragemCross",
-            email: "Garagemcross@gmail.com",
+            email: "Garagemcross@teste.com",
           };
         }
         return null;
