@@ -34,12 +34,12 @@ export default function Sidebar({ session }: SideBarProps) {
   const [activeLink, setActiveLink] = useState<string>("/dashboard");
 
   return (
-    <nav className="w-16 md:w-64 fixed left-0 top-0 z-10 h-screen border pt-8 px-4 bg-blue-cf_blue">
+    <nav className="w-16 md:w-56 fixed left-0 top-0 z-10 h-screen border pt-8 px-4 bg-blue-cf_blue">
       <div className="flex flex-col items-center">
         <div className="mb-2">
           <Image
             src="/person-circle-sidebar.png"
-            alt="Background"
+            alt="Background" 
             width={50}
             height={50}
             className="rounded-r-2xl object-cover"

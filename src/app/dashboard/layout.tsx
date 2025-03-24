@@ -1,4 +1,5 @@
 
+import Header from "@/components/Header";
 import Sidebar from "../../components/Sidebar";
 import { getServerSession } from "next-auth";
 
@@ -8,8 +9,13 @@ export default async function Layout({ children }: { children: React.ReactNode }
 
   return (
     <div>
-      <Sidebar session={session} />
-      {children}
+      <div className="flex">
+        <Sidebar session={session} />
+        <div className="w-full ml-16 md:ml-56">
+          <Header />
+          {children}
+        </div>
+      </div>
     </div>
   )
 }
