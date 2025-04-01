@@ -25,7 +25,7 @@ export default function LogoutButton() {
       disabled={loading} 
       className="w-full absolute bottom-5 left-0 px-4 py-2 cursor-pointer text-center disabled:opacity-50"
     >
-      <div className="flex items-center space-x-2 text-white md:py-2 md:px-6 text-white-cf_white">
+      <div className="flex items-center space-x-2 text-white py-4 px-6 text-white-cf_white">
         {loading ? (
           <span className="text-xl flex items-center p-2 animate-spin">
             <ImSpinner2 /> 
@@ -35,7 +35,7 @@ export default function LogoutButton() {
             <TbLogout />
           </span>
         )}
-        <span className="md:flex hidden">{loading ? "Saindo..." : "Sair"}</span>
+        <span className="flex">{loading ? "Saindo..." : "Sair"}</span>
       </div>
     </button>
   );
