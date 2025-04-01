@@ -30,7 +30,7 @@ const Sidebar = () => {
 
   return (
     <div className='sticky min-h-screen'>
-      <div className='flex flex-col items-center gap-4 mb-8'>
+      <div className='flex flex-col items-center gap-4 mb-6 mt-4'>
         <Image
           src="/person-circle-sidebar.png"
           alt="Background"
