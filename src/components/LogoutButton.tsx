@@ -23,9 +23,9 @@ const LogoutButton = () => {
     <button 
       onClick={handleLogout} 
       disabled={loading} 
-      className="w-full absolute bottom-5 left-0 px-4 py-2 cursor-pointer text-center disabled:opacity-50"
+      className="w-full cursor-pointer text-center disabled:opacity-50"
     >
-      <div className="flex items-center space-x-2 text-white py-4 px-6 text-white-cf_white">
+      <div className="flex items-center space-x-2 text-white py-10 px-2 text-white-cf_white">
         {loading ? (
           <span className="text-xl flex items-center p-2 animate-spin">
             <ImSpinner2 /> 
